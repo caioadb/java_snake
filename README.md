@@ -5,9 +5,7 @@ A simple Snake game implementation using Java 25 and Swing.
 This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** course at the **University of Trieste**.
 
 ## Features
-- Classic Snake gameplay
-- Smooth 5 TPS (Ticks Per Second) game loop
-- High-precision timing loop
+- Snake gameplay
 - TDD implementation
 
 ## Requirements
@@ -19,6 +17,8 @@ This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** c
 ```
 
 ## How to Test
+```bash
+./gradlew test
 ```
 
 ## Todo
@@ -30,6 +30,5 @@ This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** c
 - [ ] Add animations
 - [ ] Better graphics
 - [ ] Sound (maybe)
-- [ ] Add new mechanics to classic snake (maybe)bash
-./gradlew test
+- [ ] Add new mechanics to classic snake (maybe)
 ```
