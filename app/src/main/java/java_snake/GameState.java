@@ -5,7 +5,7 @@ import java.util.Random;
 public class GameState {
     private final int width;
     private final int height;
-    private final Snake snake;
+    private Snake snake;
     private Point food;
     private boolean gameOver;
     private final Random random = new Random();
@@ -17,6 +17,16 @@ public class GameState {
         this.gameOver = false;
         respawnFood();
     }
+
+    public void reset() {
+      
+        // Create the snake again
+        this.snake = new Snake(new Point(width / 2, height / 2));
+        
+        this.gameOver = false;
+        
+        respawnFood();
+            }
 
     private void respawnFood() {
         int x = random.nextInt(width);
