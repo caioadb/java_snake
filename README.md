@@ -21,7 +21,7 @@ This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** c
 ./gradlew test
 ```
 
-## Todo
+## Todo list
 - [ ] Further improvements to tick system
 - [ ] Queue up movement to make gameplay smoother
 - [ ] Add point system
