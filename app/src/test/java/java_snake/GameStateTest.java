@@ -77,5 +77,21 @@ void resetGameRestoresInitialState() {
     // Check if the snake is back at start center position
     Point center = new Point(5, 5); // 10/2 = 5
     assertEquals(center, state.getSnake().getHead(), "Snake head should be back at center");
-}
+    }
+    @Test
+    void scoreTrackingAndReset() {
+        GameState state = new GameState(10, 10);
+        
+        assertEquals(0, state.getScore());
+        
+        Point foodPos = new Point(6, 5);
+        state.setFood(foodPos);
+        state.tick();
+        
+        assertEquals(1, state.getScore());
+        
+        state.reset();
+        
+        assertEquals(0, state.getScore());
+    }
 }
