@@ -22,7 +22,7 @@ This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** c
 ```
 
 ## Todo
-- [ ] Further improvements to tick system
+- [X] Further improvements to tick system
 - [ ] Queue up movement to make gameplay smoother
 - [ ] Add point system
 - [ ] Add menu system
@@ -31,4 +31,3 @@ This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** c
 - [ ] Better graphics
 - [ ] Sound (maybe)
 - [ ] Add new mechanics to classic snake (maybe)
-```

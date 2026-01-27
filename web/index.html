@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="build-date" content="{{COMMIT_DATE}}">
+    <meta name="commit-sha" content="{{COMMIT_SHA}}">
+    <title>Java Snake - {{VERSION}}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #4ade80;
+            margin-bottom: 5px;
+        }
+        
+        .version-info {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .version-info a {
+            color: #4ade80;
+        }
+        
+        #game-container {
+            background: #000;
+            border: 3px solid #4ade80;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.3);
+        }
+        
+        #loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 600px;
+            min-height: 600px;
+            gap: 20px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(74, 222, 128, 0.2);
+            border-top-color: #4ade80;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: #4ade80;
+            font-size: 18px;
+        }
+        
+        .loading-detail {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+            color: #888;
+        }
+        
+        .controls kbd {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin: 0 2px;
+        }
+        
+        .back-link {
+            margin-top: 20px;
+            color: #4ade80;
+        }
+        
+        .error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .error h3 {
+            color: #ef4444;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🐍 Java Snake</h1>
+        <div class="version-info">
+            {{VERSION}} · {{COMMIT_DATE}} · 
+            <a href="../">← All Builds</a>
+        </div>
+    </header>
+    
+    <div id="game-container">
+        <div id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading Java Snake...</div>
+            <div class="loading-detail" id="loading-status">Initializing CheerpJ runtime</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <p>Use <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> arrow keys to control the snake</p>
+    </div>
+    
+    <a href="../" class="back-link">← Back to all builds</a>
+
+    <!-- CheerpJ Runtime -->
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+    
+    <script>
+        (async function() {
+            const statusEl = document.getElementById('loading-status');
+            const loadingEl = document.getElementById('loading');
+            const containerEl = document.getElementById('game-container');
+            
+            try {
+                statusEl.textContent = 'Loading CheerpJ runtime (this may take a moment)...';
+                
+                await cheerpjInit({
+                    status: (msg) => {
+                        console.log('CheerpJ:', msg);
+                        if (msg.includes('download')) {
+                            statusEl.textContent = 'Downloading Java runtime...';
+                        } else if (msg.includes('compil')) {
+                            statusEl.textContent = 'Compiling Java bytecode...';
+                        }
+                    }
+                });
+                
+                statusEl.textContent = 'Starting Java Snake...';
+                
+                // Create display for the Java app
+                const display = await cheerpjCreateDisplay(600, 600, containerEl);
+                
+                // Remove loading indicator
+                loadingEl.remove();
+                
+                // Run the JAR
+                await cheerpjRunJar('/app/{{JAR_NAME}}');
+                
+            } catch (error) {
+                console.error('Failed to load:', error);
+                loadingEl.innerHTML = `
+                    <div class="error">
+                        <h3>Failed to load game</h3>
+                        <p>${error.message || 'Unknown error occurred'}</p>
+                        <p style="margin-top: 10px; color: #666;">
+                            Try refreshing the page or use a different browser.
+                            CheerpJ works best in Chrome/Edge.
+                        </p>
+                    </div>
+                `;
+            }
+        })();
+    </script>
+</body>
+</html>

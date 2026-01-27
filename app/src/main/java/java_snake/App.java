@@ -9,7 +9,7 @@ public class App {
         int boardWidth = 30;
         int boardHeight = 30;
         int tileSize = 20;
-        int targetTps = 5; // Ticks Per Second
+        int targetTps = 10; // Ticks Per Second
         
         GameState gameState = new GameState(boardWidth, boardHeight);
         GamePanel gamePanel = new GamePanel(gameState, tileSize);
@@ -36,6 +36,6 @@ public class App {
         
         // Game Loop
         GameLoop gameLoop = new GameLoop(gameState, gamePanel, targetTps);
-        new Thread(gameLoop).start();
+        gameLoop.start();
     }
 }
