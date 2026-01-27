@@ -2,6 +2,7 @@ package java_snake;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -68,6 +69,10 @@ public class GamePanel extends JPanel {
         }
 
         Toolkit.getDefaultToolkit().sync();
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 14));
+        g.drawString("Score: " + gameState.getScore(), 10, 20);
     }
     
 }

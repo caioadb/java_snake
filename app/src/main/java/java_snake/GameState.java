@@ -9,6 +9,7 @@ public class GameState {
     private Point food;
     private boolean gameOver;
     private final Random random = new Random();
+    private int score;
 
     public GameState(int width, int height) {
         this.width = width;
@@ -24,6 +25,8 @@ public class GameState {
         this.snake = new Snake(new Point(width / 2, height / 2));
         
         this.gameOver = false;
+        
+        this.score = 0;
         
         respawnFood();
             }
@@ -51,6 +54,7 @@ public class GameState {
         Point nextHead = snake.peekNextHead();
         if (nextHead.equals(food)) {
             snake.setGrowing(true);
+            score++;
             respawnFood();
         }
 
@@ -85,4 +89,7 @@ public class GameState {
     
     public int getWidth() { return width; }
     public int getHeight() { return height; }
+    public int getScore() {
+        return score;
+    }
 }
