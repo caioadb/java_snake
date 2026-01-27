@@ -37,24 +37,6 @@ application {
     mainClass = 'java_snake.App'
 }
 
-// Configure JAR to be runnable
-jar {
-    manifest {
-        attributes(
-            'Main-Class': 'java_snake.App',
-            'Implementation-Title': 'Java Snake',
-            'Implementation-Version': project.version ?: '1.0'
-        )
-    }
-    
-    // Include all dependencies in the JAR for standalone execution
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
