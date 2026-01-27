@@ -22,7 +22,7 @@ public class App {
         frame.setVisible(true);
         
         // Input Handling
-        frame.addKeyListener(new KeyAdapter() {
+        gamePanel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
@@ -33,6 +33,14 @@ public class App {
                 }
             }
         });
+
+        frame.setVisible(true);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+            gamePanel.requestFocusInWindow();
+        }
+    });
         
         // Game Loop
         GameLoop gameLoop = new GameLoop(gameState, gamePanel, targetTps);
