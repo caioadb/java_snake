@@ -63,8 +63,7 @@ public class Menu extends JPanel implements GameObserver {
             public void actionPerformed(ActionEvent e) {
                 gameState.reset();
                 restartButton.setVisible(false); // Hiding button again
-                toMenuButton.setVisible(false);
-                requestFocusInWindow(); // Making sure keyboard still works
+                toMenuButton.setVisible(false); // Making sure keyboard still works
             }
         });
 
@@ -73,7 +72,6 @@ public class Menu extends JPanel implements GameObserver {
             public void actionPerformed(ActionEvent e) {
                 gameState.stop();
                 updateState();
-                requestFocusInWindow();
             }
         });
         
