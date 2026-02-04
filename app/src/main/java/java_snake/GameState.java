@@ -1,10 +1,14 @@
 package java_snake;
 
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameState {
+    
     private final int width;
     private final int height;
+    private List<GameObserver> observers = new ArrayList<>();
     private Snake snake;
     private Point food;
     private boolean onMenu;
@@ -21,7 +25,17 @@ public class GameState {
         this.snake = new Snake(new Point(width / 2, height / 2));
         this.score = 0;
         respawnFood();
+
+    }
     
+    public void addObserver(GameObserver observer) {
+        observers.add(observer);
+    }
+
+    private void notifyObservers() {
+        for (GameObserver observer : observers) {
+            observer.onGameState(this);
+        }
     }
 
     public void start() {
@@ -30,6 +44,7 @@ public class GameState {
         this.score = 0;
         onMenu = false;    
         respawnFood();
+        notifyObservers();
 
     }
 
@@ -37,6 +52,7 @@ public class GameState {
 
         gameOver = false;
         onMenu = true;
+        notifyObservers();
 
     }
 
@@ -44,12 +60,11 @@ public class GameState {
       
         // Create the snake again
         this.snake = new Snake(new Point(width / 2, height / 2));
-        
         this.gameOver = false;
-        
         this.score = 0;
-        
         respawnFood();
+        notifyObservers();
+
     }
 
     private void respawnFood() {
@@ -71,8 +86,10 @@ public class GameState {
     }
 
     public void tick() {
-        if (gameOver) return;
-        if (onMenu) return;
+        if (gameOver || onMenu) {
+            notifyObservers();
+            return;
+        }
 
         Point nextHead = snake.peekNextHead();
         if (nextHead.equals(food)) {
@@ -116,7 +133,5 @@ public class GameState {
     
     public int getWidth() { return width; }
     public int getHeight() { return height; }
-    public int getScore() {
-        return score;
-    }
+    public int getScore() { return score; }
 }

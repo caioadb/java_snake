@@ -12,6 +12,7 @@ public class App {
         int tileSize = 20;
         int targetTps = 10; // Ticks Per Second
         
+
         GameState gameState = new GameState(boardWidth, boardHeight);
         GamePanel gamePanel = new GamePanel(gameState, tileSize);
         

@@ -2,7 +2,6 @@ package java_snake;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
 
 class SnakeTest {
     @Test
