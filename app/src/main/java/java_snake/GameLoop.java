@@ -81,6 +81,8 @@ public class GameLoop implements Runnable {
     }
     
     private void printDiagnostics() {
+        if(gameState.isGameOver() || gameState.isOnMenu()) return;
+
         int count = Math.min(tickCount, tickIntervals.length);
         long sum = 0;
         long min = Long.MAX_VALUE;

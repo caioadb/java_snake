@@ -13,7 +13,11 @@ import java.awt.event.ActionEvent;
 public class GamePanel extends JPanel {
     private final GameState gameState;
     private final int tileSize;
+    private JButton startButton;
+    private JButton settingsButton;
+    private JButton quitButton;
     private JButton restartButton;
+    private JButton toMenuButton;
 
     public GamePanel(GameState gameState, int tileSize) {
         this.gameState = gameState;
@@ -24,20 +28,7 @@ public class GamePanel extends JPanel {
         // Disabling default layout to position button manually
         this.setLayout(null);
         // Creating the Restart Button
-        restartButton = new JButton("RESTART");
-        restartButton.setFocusable(false); // Preventing button from stealing keyboard focus!
-        restartButton.setVisible(false);   // Hiding it initially
-        // Defining what happens when clicked
-        restartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameState.reset();
-                restartButton.setVisible(false); // Hiding button again
-                requestFocusInWindow(); // Making sure keyboard still works
-            }
-        });
-        // Adding button to the panel
-        this.add(restartButton);
+        createButtons();
     }
 
     @Override
@@ -53,18 +44,34 @@ public class GamePanel extends JPanel {
             g.fillRect(p.x() * tileSize, p.y() * tileSize, tileSize, tileSize);
         }
 
+        if (gameState.isOnMenu()) {
+            g.setColor(Color.WHITE);
+            g.drawString("SNAKE!", getWidth() / 2 - 30, getHeight() / 2);
+            int btnWidth = 110;
+            int btnHeight = 40;
+            int x = (getWidth() - btnWidth) / 2;
+            int y = (getHeight() - btnHeight) / 2; // Slightly below center
+            startButton.setBounds(x, y - 50, btnWidth, btnHeight);
+            startButton.setVisible(true);
+            settingsButton.setBounds(x, y, btnWidth, btnHeight);
+            settingsButton.setVisible(true);
+            quitButton.setBounds(x, y + 50, btnWidth, btnHeight);
+            quitButton.setVisible(true);
+        }
+
         if (gameState.isGameOver()) {
             g.setColor(Color.WHITE);
-            g.drawString("Game Over", getWidth() / 2 - 30, getHeight() / 2);
+            g.drawString("Game Over", getWidth() / 2 - 30, getHeight() / 2 - 40);
             // Calculate center position for the button
-        int btnWidth = 100;
-        int btnHeight = 40;
-        int x = (getWidth() - btnWidth) / 2;
-        int y = (getHeight() - btnHeight) / 2 + 50; // Slightly below center
-
-        // Position and show the button
-        restartButton.setBounds(x, y, btnWidth, btnHeight);
-        restartButton.setVisible(true);
+            int btnWidth = 110;
+            int btnHeight = 40;
+            int x = (getWidth() - btnWidth) / 2;
+            int y = (getHeight() - btnHeight) / 2; // Slightly below center
+            // Position and show the button
+            restartButton.setBounds(x, y, btnWidth, btnHeight);
+            restartButton.setVisible(true);
+            toMenuButton.setBounds(x, y + 50, btnWidth, btnHeight);
+            toMenuButton.setVisible(true);
     
         }
 
@@ -73,6 +80,90 @@ public class GamePanel extends JPanel {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 14));
         g.drawString("Score: " + gameState.getScore(), 10, 20);
+    }
+
+    private void createButtons() {
+        restartButton = new JButton("Play again");
+        restartButton.setFocusable(false); // Preventing button from stealing keyboard focus!
+        restartButton.setVisible(false);   // Hiding it initially
+
+        startButton = new JButton("GO!");
+        startButton.setFocusable(false);
+        startButton.setVisible(false);
+        
+        settingsButton = new JButton("Settings");
+        settingsButton.setFocusable(false);
+        settingsButton.setVisible(false);
+        
+        quitButton = new JButton("Quit");
+        quitButton.setFocusable(false);
+        quitButton.setVisible(false);
+
+        toMenuButton = new JButton("Quit to Menu");
+        toMenuButton.setFocusable(false);
+        toMenuButton.setVisible(false);
+        
+        // Defining what happens when clicked
+        restartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameState.reset();
+                restartButton.setVisible(false); // Hiding button again
+                toMenuButton.setVisible(false);
+                requestFocusInWindow(); // Making sure keyboard still works
+            }
+        });
+
+        toMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setButtonsInv();
+                gameState.stop();
+                restartButton.setVisible(false); // Hiding button again
+                toMenuButton.setVisible(false);
+                requestFocusInWindow(); // Making sure keyboard still works
+            }
+        });
+        
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setButtonsInv();
+                gameState.start();
+            }
+        });
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setButtonsInv();
+                //gameState.settings();
+            }
+        });
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        toMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setButtonsInv();
+                gameState.stop();
+            }
+        });
+        this.add(startButton);
+        this.add(settingsButton);
+        this.add(quitButton);
+        this.add(restartButton);
+        this.add(toMenuButton);
+    }
+    private void setButtonsInv() {
+        startButton.setVisible(false);
+        restartButton.setVisible(false);
+        settingsButton.setVisible(false);
+        quitButton.setVisible(false);
+        toMenuButton.setVisible(false);
     }
     
 }

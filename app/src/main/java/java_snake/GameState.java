@@ -7,16 +7,37 @@ public class GameState {
     private final int height;
     private Snake snake;
     private Point food;
+    private boolean onMenu;
     private boolean gameOver;
     private final Random random = new Random();
     private int score;
 
     public GameState(int width, int height) {
+
         this.width = width;
         this.height = height;
-        this.snake = new Snake(new Point(width / 2, height / 2));
         this.gameOver = false;
+        this.onMenu = true;
+        this.snake = new Snake(new Point(width / 2, height / 2));
+        this.score = 0;
         respawnFood();
+    
+    }
+
+    public void start() {
+
+        this.snake = new Snake(new Point(width / 2, height / 2));
+        this.score = 0;
+        onMenu = false;    
+        respawnFood();
+
+    }
+
+    public void stop() {
+
+        gameOver = false;
+        onMenu = true;
+
     }
 
     public void reset() {
@@ -29,9 +50,10 @@ public class GameState {
         this.score = 0;
         
         respawnFood();
-            }
+    }
 
     private void respawnFood() {
+        
         int x = random.nextInt(width);
         int y = random.nextInt(height);
         this.food = new Point(x, y);
@@ -50,6 +72,7 @@ public class GameState {
 
     public void tick() {
         if (gameOver) return;
+        if (onMenu) return;
 
         Point nextHead = snake.peekNextHead();
         if (nextHead.equals(food)) {
@@ -85,6 +108,10 @@ public class GameState {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+    
+    public boolean isOnMenu() {
+        return onMenu;
     }
     
     public int getWidth() { return width; }

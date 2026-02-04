@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class App {
+    
     public static void main(String[] args) {
         int boardWidth = 30;
         int boardHeight = 30;
@@ -37,13 +38,13 @@ public class App {
         frame.setVisible(true);
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
         @Override
-        public void run() {
-            gamePanel.requestFocusInWindow();
-        }
-    });
-        
+            public void run() {
+                gamePanel.requestFocusInWindow();
+            }
+        });
         // Game Loop
         GameLoop gameLoop = new GameLoop(gameState, gamePanel, targetTps);
         gameLoop.start();
+            
     }
 }
