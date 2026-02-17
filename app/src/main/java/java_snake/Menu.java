@@ -15,6 +15,7 @@ public class Menu extends JPanel implements GameObserver {
     private JButton quitButton;
     private JButton restartButton;
     private JButton toMenuButton;
+    private HighScoreManager highscoreManager;
 
     private final GameState gameState;
 
@@ -24,6 +25,8 @@ public class Menu extends JPanel implements GameObserver {
     public Menu (GameState gameState, int tileSize) {
         
         this.gameState = gameState;
+
+        this.highscoreManager = new HighScoreManager();
 
         setBounds(0,0,gameState.getWidth() * tileSize, gameState.getHeight() * tileSize);
         setLayout(null);
@@ -117,14 +120,30 @@ public class Menu extends JPanel implements GameObserver {
         super.paintComponent(g);
 
         g.setColor(Color.WHITE);
+       
+        int xPos = getWidth() - 130;
+        int yPos = 30;
 
         if (gameState.isOnMenu()) {
             g.setColor(Color.WHITE);
             g.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
             g.drawString("SNAKE", getWidth() / 2 - 42, getHeight() / 4 + 60);
+            g.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+            g.drawString("TOP 3 SCORES", xPos, yPos);
+            for (ScoreRecord s : highscoreManager.getScores()) {
+                yPos += 15;
+                g.drawString(s.initials() + ": " + s.score(), xPos, yPos);
+            }
         } 
         else if (gameState.isGameOver()) {
             g.drawString("Game Over", getWidth() / 2 - 30, getHeight() / 2 - 40);
+            g.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
+            int gameOverY = 30;
+            g.drawString("TOP 3:", xPos, gameOverY);
+            for (ScoreRecord s : highscoreManager.getScores()) {
+                gameOverY += 15;
+                g.drawString(s.initials() + ": " + s.score(), xPos, gameOverY);
+            }
         }
     }
 
@@ -134,6 +153,8 @@ public class Menu extends JPanel implements GameObserver {
     }
 
     public void updateState() {
+
+        this.highscoreManager = new HighScoreManager();
         
         setButtonsInv();
         
