@@ -10,13 +10,16 @@ import java.awt.Toolkit;
 public class GamePanel extends JPanel {
     private final GameState gameState;
     private Menu menu;
+    private Sounds sounds;
     private final int tileSize;
 
     public GamePanel(GameState gameState, int tileSize) {
+
         this.gameState = gameState;
         this.tileSize = tileSize;
         this.menu = new Menu(gameState, tileSize);
-        
+        this.sounds = new Sounds(gameState);
+
         this.setPreferredSize(new Dimension(gameState.getWidth() * tileSize, gameState.getHeight() * tileSize));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -24,6 +27,7 @@ public class GamePanel extends JPanel {
         this.setLayout(null);
 
         gameState.addObserver(menu);
+        gameState.addObserver(sounds);
 
         this.add(menu);
         menu.updateState();

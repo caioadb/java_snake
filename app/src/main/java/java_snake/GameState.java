@@ -38,6 +38,12 @@ public class GameState {
         }
     }
 
+    private void doSound(int choice) {
+        for (GameObserver observer : observers) {
+            observer.playSound(this, choice);
+        }
+    }
+
     public void start() {
 
         this.snake = new Snake(new Point(width / 2, height / 2));
@@ -45,6 +51,7 @@ public class GameState {
         onMenu = false;    
         respawnFood();
         notifyObservers();
+        doSound(1);
 
     }
 
@@ -53,6 +60,7 @@ public class GameState {
         gameOver = false;
         onMenu = true;
         notifyObservers();
+        doSound(0);
 
     }
 
@@ -64,6 +72,7 @@ public class GameState {
         this.score = 0;
         respawnFood();
         notifyObservers();
+        doSound(1);
 
     }
 
@@ -72,7 +81,7 @@ public class GameState {
         int x = random.nextInt(width);
         int y = random.nextInt(height);
         this.food = new Point(x, y);
-        
+        doSound(0);
         // Ensure food doesn't spawn on snake body
         while (snake.getBody().contains(this.food)) {
              x = random.nextInt(width);
@@ -104,12 +113,16 @@ public class GameState {
         
         // Check Wall Collision
         if (head.x() < 0 || head.x() >= width || head.y() < 0 || head.y() >= height) {
+            notifyObservers();
+            doSound(2);
             gameOver = true;
             return;
         }
         
         // Check Self Collision
         if (snake.checkSelfCollision()) {
+            notifyObservers();
+            doSound(2);
             gameOver = true;
             return;
         }

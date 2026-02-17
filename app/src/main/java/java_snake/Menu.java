@@ -133,6 +133,10 @@ public class Menu extends JPanel implements GameObserver {
         updateState();
     }
 
+    @Override
+    public void playSound(GameState gameState, int choice) {
+    }
+
     public void updateState() {
         
         setButtonsInv();
