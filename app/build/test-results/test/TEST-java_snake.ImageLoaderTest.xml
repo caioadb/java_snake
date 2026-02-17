@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="java_snake.ImageLoaderTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-02-17T22:22:38.560Z" hostname="Arda-MacBook-Air.local" time="0.184">
+<testsuite name="java_snake.ImageLoaderTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-02-17T22:34:58.054Z" hostname="Arda-MacBook-Air.local" time="0.188">
   <properties/>
-  <testcase name="clearCache_removesAllCachedImages()" classname="java_snake.ImageLoaderTest" time="0.026"/>
-  <testcase name="getScaledImage_differentSizesAreCachedSeparately()" classname="java_snake.ImageLoaderTest" time="0.15"/>
+  <testcase name="clearCache_removesAllCachedImages()" classname="java_snake.ImageLoaderTest" time="0.022"/>
+  <testcase name="getScaledImage_differentSizesAreCachedSeparately()" classname="java_snake.ImageLoaderTest" time="0.158"/>
   <testcase name="loadImage_withNullPath_throwsException()" classname="java_snake.ImageLoaderTest" time="0.001"/>
   <testcase name="loadImage_withEmptyPath_throwsException()" classname="java_snake.ImageLoaderTest" time="0.001"/>
-  <testcase name="getScaledImage_returnsCorrectSize()" classname="java_snake.ImageLoaderTest" time="0.001"/>
+  <testcase name="getScaledImage_returnsCorrectSize()" classname="java_snake.ImageLoaderTest" time="0.002"/>
   <testcase name="loadImage_withValidPath_returnsImage()" classname="java_snake.ImageLoaderTest" time="0.001"/>
   <testcase name="loadImage_withInvalidPath_throwsException()" classname="java_snake.ImageLoaderTest" time="0.001"/>
   <testcase name="loadImage_cachesImages()" classname="java_snake.ImageLoaderTest" time="0.001"/>
