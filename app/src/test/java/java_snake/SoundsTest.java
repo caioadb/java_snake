@@ -2,12 +2,8 @@ package java_snake;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 
 public class SoundsTest extends SnakeTest {
@@ -17,24 +13,39 @@ public class SoundsTest extends SnakeTest {
 
         GameState game = new GameState(20, 20);
         JButton startButton = new JButton();
-        
+        Sounds sounds = new Sounds(game);
+
         assertTrue(game.isOnMenu());
         startButton.addActionListener(e -> game.start());
         startButton.doClick();
-        assertTrue(sounds.play());
+        assertTrue(sounds.play(1));
 
     }
-
+    
     @Test
     void testPointSound() {
+        GameState game = new GameState(20, 20);
+        JButton startButton = new JButton();
+        Sounds sounds = new Sounds(game);
+
+        assertTrue(game.isOnMenu());
+        startButton.addActionListener(e -> game.start());
+        startButton.doClick();
         testGrow();
-        assertTrue(sounds.point());
+        assertTrue(sounds.play(0));
     }
 
     @Test
     void testGameOverSound() {
-        testSelfCollision();
-        assertTrue(sounds.death());
-    }
+        GameState game = new GameState(20, 20);
+        JButton startButton = new JButton();
+        Sounds sounds = new Sounds(game);
 
+        assertTrue(game.isOnMenu());
+        startButton.addActionListener(e -> game.start());
+        startButton.doClick();
+        testSelfCollision();
+        assertTrue(sounds.play(3));
+    }
+    
 }
