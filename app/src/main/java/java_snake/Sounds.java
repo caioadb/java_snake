@@ -6,10 +6,7 @@ import javax.sound.sampled.Clip;
 
 public class Sounds implements GameObserver {
     
-    private final GameState gameState;
-
     public Sounds(GameState gameState) {
-        this.gameState = gameState;
     }
 
     @Override
