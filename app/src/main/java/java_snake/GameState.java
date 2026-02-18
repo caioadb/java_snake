@@ -15,7 +15,7 @@ public class GameState {
     private boolean gameOver;
     private final Random random = new Random();
     private int score;
-    private HighScoreManager highscoreManager;
+    
 
     public GameState(int width, int height) {
 
@@ -25,7 +25,7 @@ public class GameState {
         this.onMenu = true;
         this.snake = new Snake(new Point(width / 2, height / 2));
         this.score = 0;
-        this.highscoreManager = new HighScoreManager();
+        
         respawnFood();
 
     }
@@ -37,6 +37,12 @@ public class GameState {
     private void notifyObservers() {
         for (GameObserver observer : observers) {
             observer.onGameState(this);
+        }
+    }
+
+    public void notifyGameOver(int score) {
+        for (GameObserver observer : observers) {
+            observer.onGameOver(this, score);
         }
     }
 
@@ -118,12 +124,13 @@ public class GameState {
             notifyObservers();
             doSound(2);
             gameOver = true;
-            if (highscoreManager.isHighScore(score)) {
+            notifyGameOver(score);
+            /*if (highscoreManager.isHighScore(score)) {
                 String name = javax.swing.JOptionPane.showInputDialog("NEW RECORD! Enter 3 Initials:");
                 if (name != null && !name.isEmpty()) {
                     highscoreManager.addScore(name, score);
                 }
-            }
+            }*/
             return;
         }
         
@@ -132,12 +139,13 @@ public class GameState {
             notifyObservers();
             doSound(2);
             gameOver = true;
-            if (highscoreManager.isHighScore(score)) {
+            notifyGameOver(score);
+            /*if (highscoreManager.isHighScore(score)) {
                 String name = javax.swing.JOptionPane.showInputDialog("NEW RECORD! Enter 3 Initials:");
                 if (name != null && !name.isEmpty()) {
                     highscoreManager.addScore(name, score);
                 }
-            }
+            }*/
             return;
         }
     }

@@ -10,10 +10,6 @@ public class Sounds implements GameObserver {
     }
 
     @Override
-    public void onGameState(GameState gameState) {
-    }
-
-    @Override
     public void playSound(GameState gameState, int choice) {
         play(choice);
     }

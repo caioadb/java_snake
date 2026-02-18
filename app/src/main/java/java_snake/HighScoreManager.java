@@ -4,9 +4,14 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public class HighScoreManager {
+public class HighScoreManager implements GameObserver {
     private List<ScoreRecord> scores = new ArrayList<>();
     private final String FILE_NAME = "highscores.txt";
+
+    @Override
+    public void onGameOver(GameState gameState, int score) {
+        highScoreDialogBox(score);
+    }
 
     public HighScoreManager() {
         load();
@@ -29,6 +34,15 @@ public class HighScoreManager {
 
     public List<ScoreRecord> getScores() {
         return scores;
+    }
+
+    public void highScoreDialogBox(int score) {
+        if (isHighScore(score)) {
+            String name = javax.swing.JOptionPane.showInputDialog("NEW RECORD! Enter 3 Initials:");
+            if (name != null && !name.isEmpty()) {
+                addScore(name, score);
+            }
+        }
     }
 
     private void save() {

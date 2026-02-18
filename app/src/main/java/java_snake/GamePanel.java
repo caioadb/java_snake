@@ -12,6 +12,7 @@ public class GamePanel extends JPanel {
     private Menu menu;
     private Sounds sounds;
     private final int tileSize;
+    private HighScoreManager highscoreManager;
 
     public GamePanel(GameState gameState, int tileSize) {
 
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel {
         this.tileSize = tileSize;
         this.menu = new Menu(gameState, tileSize);
         this.sounds = new Sounds(gameState);
+        this.highscoreManager = new HighScoreManager();
 
         this.setPreferredSize(new Dimension(gameState.getWidth() * tileSize, gameState.getHeight() * tileSize));
         this.setBackground(Color.BLACK);
@@ -28,7 +30,7 @@ public class GamePanel extends JPanel {
 
         gameState.addObserver(menu);
         gameState.addObserver(sounds);
-
+        gameState.addObserver(highscoreManager);
         this.add(menu);
         menu.updateState();
 
