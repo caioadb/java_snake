@@ -11,53 +11,29 @@ public class Sounds implements GameObserver {
 
     @Override
     public void playSound(GameState gameState, int choice) {
-        play(choice);
+        switch(choice) {
+            case 0 -> playPoint();
+            case 1 -> playConfirm();
+            case 2 -> playDeath();
+        }
     }
 
-    public boolean play(int choice) {
-        if(choice == 0) {
-            try {
-                AudioInputStream confirm = 
-                AudioSystem.getAudioInputStream(
-                    Sounds.class.getResource("/sfx/point.wav")
-                );
-                Clip clip = AudioSystem.getClip();
-                clip.open(confirm);
-                clip.start();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            }
+    public boolean playPoint()   { play("/sfx/point.wav"); return true;}
+    public boolean playConfirm() { play("/sfx/confirm.wav"); return true;}
+    public boolean playDeath()   { play("/sfx/death.wav"); return true;}
+
+    public void play(String choice) {
+        try {
+            AudioInputStream confirm = 
+            AudioSystem.getAudioInputStream(
+            Sounds.class.getResource(choice)
+            );
+            Clip clip = AudioSystem.getClip();
+            clip.open(confirm);
+            clip.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        else if(choice == 1) {
-            try {
-                AudioInputStream gotPoint = 
-                AudioSystem.getAudioInputStream(
-                    Sounds.class.getResource("/sfx/confirm.wav")
-                );
-                Clip clip = AudioSystem.getClip();
-                clip.open(gotPoint);
-                clip.start();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        else if(choice == 2) {
-            try {
-                AudioInputStream death = 
-                AudioSystem.getAudioInputStream(
-                    Sounds.class.getResource("/sfx/death.wav")
-                );
-                Clip clip = AudioSystem.getClip();
-                clip.open(death);
-                clip.start();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        return true;
     }
 
 }

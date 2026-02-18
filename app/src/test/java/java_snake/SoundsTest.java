@@ -18,7 +18,7 @@ public class SoundsTest extends SnakeTest {
         assertTrue(game.isOnMenu());
         startButton.addActionListener(e -> game.start());
         startButton.doClick();
-        assertTrue(sounds.play(1));
+        assertTrue(sounds.playPoint());
 
     }
     
@@ -32,7 +32,7 @@ public class SoundsTest extends SnakeTest {
         startButton.addActionListener(e -> game.start());
         startButton.doClick();
         testGrow();
-        assertTrue(sounds.play(0));
+        assertTrue(sounds.playConfirm());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SoundsTest extends SnakeTest {
         startButton.addActionListener(e -> game.start());
         startButton.doClick();
         testSelfCollision();
-        assertTrue(sounds.play(3));
+        assertTrue(sounds.playDeath());
     }
     
 }
