@@ -17,6 +17,7 @@ build/
 *.tar.gz
 *.rar
 
+/app/highscores.txt
 !gradle/wrapper/gradle-wrapper.jar
 
 # IntelliJ IDEA
