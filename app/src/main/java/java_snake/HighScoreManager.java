@@ -6,7 +6,7 @@ import java.util.*;
 
 public class HighScoreManager implements GameObserver {
     private List<ScoreRecord> scores = new ArrayList<>();
-    private final String FILE_NAME = "highscores.txt";
+    private final String fileName;
 
     @Override
     public void onGameOver(GameState gameState, int score) {
@@ -14,6 +14,11 @@ public class HighScoreManager implements GameObserver {
     }
 
     public HighScoreManager() {
+        this("highscores.txt");
+    }
+
+    public HighScoreManager(String fileName) {
+        this.fileName = fileName;
         load();
     }
 
@@ -46,7 +51,7 @@ public class HighScoreManager implements GameObserver {
     }
 
     private void save() {
-        try (PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME))) {
+        try (PrintWriter out = new PrintWriter(new FileWriter(fileName))) {
             for (ScoreRecord s : scores) {
                 out.println(s.initials() + "," + s.score());
             }
@@ -56,7 +61,7 @@ public class HighScoreManager implements GameObserver {
     private void load() {
         scores.clear();
         try {
-            Path path = Paths.get(FILE_NAME);
+            Path path = Paths.get(fileName);
             if (Files.exists(path)) {
                 List<String> lines = Files.readAllLines(path);
                 for (String line : lines) {

@@ -3,11 +3,19 @@ package java_snake;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
+import org.junit.jupiter.api.io.TempDir;
+import java.nio.file.Path;
 
 class HighScoreManagerTest {
+    
+    @TempDir
+    Path tempDir;
+
     @Test
     void testMaintainsOnlyTopThreeScores() {
-        HighScoreManager manager = new HighScoreManager();
+        
+        Path tempFile = tempDir.resolve("test_highscores.txt");
+        HighScoreManager manager = new HighScoreManager(tempFile.toString());
         manager.addScore("AAA", 100);
         manager.addScore("BBB", 500);
         manager.addScore("CCC", 300);
