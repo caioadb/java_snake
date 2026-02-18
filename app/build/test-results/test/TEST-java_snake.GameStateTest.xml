@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="java_snake.GameStateTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-02-17T22:34:58.041Z" hostname="Arda-MacBook-Air.local" time="0.009">
+<testsuite name="java_snake.GameStateTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-02-18T12:40:15.357Z" hostname="Arda-MacBook-Air.local" time="0.008">
   <properties/>
   <testcase name="testWallCollision()" classname="java_snake.GameStateTest" time="0.005"/>
   <testcase name="testInitialization()" classname="java_snake.GameStateTest" time="0.001"/>
   <testcase name="resetGameRestoresInitialState()" classname="java_snake.GameStateTest" time="0.001"/>
   <testcase name="testFoodConsumption()" classname="java_snake.GameStateTest" time="0.0"/>
-  <testcase name="scoreTrackingAndReset()" classname="java_snake.GameStateTest" time="0.001"/>
+  <testcase name="scoreTrackingAndReset()" classname="java_snake.GameStateTest" time="0.0"/>
   <testcase name="testTickMovesSnake()" classname="java_snake.GameStateTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
