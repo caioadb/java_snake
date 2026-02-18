@@ -125,12 +125,6 @@ public class GameState {
             doSound(2);
             gameOver = true;
             notifyGameOver(score);
-            /*if (highscoreManager.isHighScore(score)) {
-                String name = javax.swing.JOptionPane.showInputDialog("NEW RECORD! Enter 3 Initials:");
-                if (name != null && !name.isEmpty()) {
-                    highscoreManager.addScore(name, score);
-                }
-            }*/
             return;
         }
         
@@ -140,12 +134,6 @@ public class GameState {
             doSound(2);
             gameOver = true;
             notifyGameOver(score);
-            /*if (highscoreManager.isHighScore(score)) {
-                String name = javax.swing.JOptionPane.showInputDialog("NEW RECORD! Enter 3 Initials:");
-                if (name != null && !name.isEmpty()) {
-                    highscoreManager.addScore(name, score);
-                }
-            }*/
             return;
         }
     }
