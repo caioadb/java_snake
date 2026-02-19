@@ -24,10 +24,10 @@ This project was created for the **567SM - SOFTWARE DEVELOPMENT METHODS 2025** c
 ## Todo
 - [X] Further improvements to tick system
 - [ ] Queue up movement to make gameplay smoother
-- [ ] Add point system
+- [X] Add point system
 - [X] Add menu system
 - [ ] Dynamic difficulty system
 - [ ] Add animations
 - [ ] Better graphics
-- [ ] Sound (maybe)
+- [X] Sound (maybe)
 - [ ] Add new mechanics to classic snake (maybe)
